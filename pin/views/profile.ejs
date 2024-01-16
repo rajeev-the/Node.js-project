@@ -1,0 +1,44 @@
+<% include ./partials/header.ejs %>
+
+<div class="profile w-full min-h-screen bg-zinc-800 pt-3">
+    <form id="uploadform"  hidden action="/file" method="post" enctype="multipart/form-data">
+ 
+        <input type="file" name="image">
+
+    </form>
+    <div class="profdets  flex flex-col items-center mt-10">
+
+        <div class="h-32 w-32 bg-zinc-200 rounded-full  overflow-hidden">
+            <img class="w-full h-full object-cover" src="/images/uploads/<%= user.profileImage%>" alt="">
+        </div>
+        <button id="uploadicon" class=" text-black rounded-lg p-0.5 mt-0.5  bg-green-300" >Edit pic</button>
+        <h1 class="text-3xl font-semiblod text-white">Rajeev Ranjan</h1>
+        <h3 class="text-md text-white">@username</h3>
+        
+        <a href="/add" class="px-10 py-2 rounded-lg bg-red-700 text-xs font-semibold mt-2">Add New Post  </a>
+    </div>
+    <div class="card flex flex-wrap  g-10 px-10 mt-5 ">
+        <div>
+            <div class="w-52 h-52 bg-zinc-200 rounded-lg  overflow-hidden">
+                <img class="w-full h-full object-cover" src="/images/uploads/<%=user?.post[0]?.image%>" alt="">
+            </div>
+         <a class="text-xl font-semiblod mt-3 text-white" href="/show/posts">Your upload Post </a>
+            <h5 class=" text-sm font-medium  text-white opacity-60"><%= user.post.length %></h5>
+        </div>
+       
+    </div>
+
+</div>
+<script>
+
+    document.querySelector("#uploadicon").addEventListener("click" , function(){
+        document.querySelector("#uploadform input").click();
+    })
+
+    document.querySelector("#uploadform input").addEventListener("change",function(){
+        document.querySelector("#uploadform").submit()
+    })
+</script>
+
+
+<% include ./partials/footer.ejs %>
